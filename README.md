@@ -1,2 +1,2 @@
-# linux-command
+# Linux Command
 Linux Command Library
