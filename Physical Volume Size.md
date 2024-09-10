@@ -3,7 +3,9 @@
 
 **Aşamalar**
 > Disk Alanı 4TB -> 10TB Yükseltildi
+> 
 > Sunucu restart edildi
+> 
 > Disk alanı kontrolü vedisk alanı genişletmek için
 
     lsblk
