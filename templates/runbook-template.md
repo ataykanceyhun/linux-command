@@ -1,5 +1,12 @@
 # <Runbook Basligi>
 
+| Alan | Deger |
+| --- | --- |
+| Risk | <Low|Medium|High> |
+| Son Dogrulama | <YYYY-MM-DD> |
+| Tahmini Sure | <or: 15 dk> |
+| Kesinti Etkisi | <Yok|Kismi|Tam> |
+
 ## Amac
 
 Bu prosedurun hedefini 1-2 cumle ile yazin.
@@ -15,6 +22,14 @@ Bu prosedurun hedefini 1-2 cumle ile yazin.
 - Gerekli cihaz/volume/arayuz bilgileri
 - Bakim penceresi veya kesinti notlari
 
+Ornek degisken tablosu:
+
+| Degisken | Aciklama | Ornek |
+| --- | --- | --- |
+| `<disk_device>` | Fiziksel disk cihazi | `sdb` |
+| `<vg_name>` | Volume group adi | `vg_data` |
+| `<mount_point>` | Mount noktasi | `/mnt/data` |
+
 ## Risk ve Geri Donus (Rollback)
 
 - Riskler:
@@ -23,12 +38,10 @@ Bu prosedurun hedefini 1-2 cumle ile yazin.
   - Yanlis hedefte komut calisma riski
 - Yedekleme:
 ```bash
-# Ornek
 cp /etc/fstab /etc/fstab.bak.$(date +%F-%H%M%S)
 ```
 - Rollback:
 ```bash
-# Ornek: yedekten geri yukleme
 cp /etc/fstab.bak.<timestamp> /etc/fstab
 ```
 
@@ -36,25 +49,22 @@ cp /etc/fstab.bak.<timestamp> /etc/fstab
 
 1. On kontrol:
 ```bash
-# Ornek
 lsblk
 ```
 2. Degisiklik:
 ```bash
-# Ornek
 echo "degisiklik komutu"
 ```
 3. Gerekirse kalici hale getirme:
 ```bash
-# Ornek
 echo "persist adimi"
 ```
 
 ## Dogrulama
 
 ```bash
-# Ornek
 df -hT
+mount
 ```
 
 ## Sorun Giderme

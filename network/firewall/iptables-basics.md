@@ -1,5 +1,12 @@
 # iptables Temelleri
 
+| Alan | Deger |
+| --- | --- |
+| Risk | High |
+| Son Dogrulama | 2026-02-16 |
+| Tahmini Sure | 10-20 dk |
+| Kesinti Etkisi | Tam |
+
 ## Amac
 
 Temel `iptables` kurallari ile erisim kontrolu saglamak, degisiklikleri
@@ -7,22 +14,30 @@ kalicilastirmak ve guvenli rollback akisina sahip olmak.
 
 ## Kapsam
 
-- Giris (INPUT) zinciri temel kurallar
-- SSH erisim whitelist ornegi
-- Kural listeleme ve silme islemleri
+- INPUT zinciri temel kurallar
+- SSH whitelist kurali
+- Kural listeleme, kaydetme ve silme
 
 ## Onkosullar
 
 - `root` veya `sudo` yetkisi
 - Sunucuda `iptables` kurulu olmali
+- Out-of-band erisim (konsol/ILO) hazir olmali
 - Distro notu:
   - `RHEL/CentOS notu:` `sudo dnf install iptables-services`
   - `Ubuntu/Debian notu:` `sudo apt install iptables iptables-persistent`
 
+| Degisken | Aciklama | Ornek |
+| --- | --- | --- |
+| `<interface_name>` | Ag arayuzu | `eno1` |
+| `<source_cidr>` | Kaynak ag | `10.100.22.0/26` |
+| `<destination_ip>` | Hedef sunucu IP | `10.100.10.39` |
+| `<line_number>` | Silinecek kural satiri | `4` |
+
 ## Risk ve Geri Donus (Rollback)
 
 - Riskler:
-  - Yanlis kural nedeniyle SSH baglantisinin kesilmesi
+  - SSH baglantisinin kesilmesi
   - Kalici kural dosyasinin hatali yazilmasi
 - Yedekleme:
 ```bash
@@ -35,16 +50,16 @@ sudo iptables-restore < /root/iptables.backup.<timestamp>
 
 ## Adimlar
 
-1. On kontrol: mevcut kurallari gor.
+1. On kontrol snapshot'i al.
 ```bash
 sudo iptables -S
 sudo iptables -L -v --line-numbers
 ```
-2. Mevcut baglantilari kabul et.
+2. Iliskili mevcut baglantilari izinle.
 ```bash
 sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ```
-3. SSH icin izin kurali ekle.
+3. SSH whitelist kurali ekle.
 ```bash
 sudo iptables -A INPUT -i <interface_name> -p tcp --dport 22 \
   -s <source_cidr> -d <destination_ip> -j ACCEPT
@@ -67,7 +82,13 @@ sudo iptables -D INPUT <line_number>
 ```bash
 sudo iptables -L -v --line-numbers
 sudo iptables -S
+sudo ss -tulpen | grep :22
 ```
+
+Beklenen sonuc:
+
+- INPUT zincirinde yeni SSH kurali listelenir
+- Mevcut SSH oturumu kesilmeden devam eder
 
 ## Sorun Giderme
 
@@ -76,11 +97,15 @@ sudo iptables -S
 ```bash
 sudo iptables-restore < /root/iptables.backup.<timestamp>
 ```
-- Sorun: Kural beklenen zincirde degil.
+- Sorun: Kural yanlis sirada.
   - Cozum:
 ```bash
-sudo iptables -L INPUT -n --line-numbers
+sudo iptables -D INPUT <line_number>
+sudo iptables -I INPUT 1 -i <interface_name> -p tcp --dport 22 \
+  -s <source_cidr> -d <destination_ip> -j ACCEPT
 ```
+- Sorun: Reboot sonrasi kural kayboluyor.
+  - Cozum: Kalicilik adimini distroya uygun sekilde yeniden uygula.
 
 ## Referanslar
 
