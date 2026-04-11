@@ -25,6 +25,14 @@ kisa notlar olarak belirtilir.
 - [iptables Temelleri](network/firewall/iptables-basics.md)
 - [Network Index](network/README.md)
 
+### HPE Aruba ArubaOS-Switch
+
+- [Temel Kurulum](network/aruba-aos-switch/temel-kurulum.md)
+- [VLAN ve Port Yapilandirma](network/aruba-aos-switch/vlan-port-yapilandirma.md)
+- [LAG ve LACP Yapilandirma](network/aruba-aos-switch/lag-lacp-yapilandirma.md)
+- [Routing ve ACL Yapilandirma](network/aruba-aos-switch/routing-acl-yapilandirma.md)
+- [Aruba Switch Index](network/aruba-aos-switch/README.md)
+
 ## Runbook Katalogu
 
 | Alan | Runbook | Risk |
@@ -34,6 +42,10 @@ kisa notlar olarak belirtilir.
 | Storage | `storage/vdo/extend-vdo-capacity.md` | High |
 | Storage | `storage/xfs/create-xfs-on-lvm.md` | High |
 | Network | `network/firewall/iptables-basics.md` | High |
+| Aruba Switch | `network/aruba-aos-switch/temel-kurulum.md` | Low |
+| Aruba Switch | `network/aruba-aos-switch/vlan-port-yapilandirma.md` | Medium |
+| Aruba Switch | `network/aruba-aos-switch/lag-lacp-yapilandirma.md` | High |
+| Aruba Switch | `network/aruba-aos-switch/routing-acl-yapilandirma.md` | High |
 
 ## Hizli Baslangic
 
