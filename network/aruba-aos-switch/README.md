@@ -11,6 +11,7 @@ ArubaOS-Switch (ProCurve OS) platformu icin operasyonel runbooklari icerir.
 | [VLAN ve Port Yapilandirma](vlan-port-yapilandirma.md) | Medium | VLAN, access/trunk port, port-security |
 | [LAG ve LACP Yapilandirma](lag-lacp-yapilandirma.md) | High | Link aggregation, LACP, statik trunk |
 | [Routing ve ACL Yapilandirma](routing-acl-yapilandirma.md) | High | IP routing, inter-VLAN, statik rota, ACL |
+| [Yedekleme ve Geri Yukleme](yedekleme-geri-yukleme.md) | High | TFTP/USB yedekleme, config geri yukleme, factory reset |
 
 ## Platform Notu
 
@@ -32,4 +33,7 @@ show ip route                # rota tablosu
 show access-list             # tum ACL'ler
 write memory                 # konfigurasyonu kaydet
 copy running-config tftp ... # konfigurasyonu TFTP ile yedekle
+copy tftp startup-config ... # TFTP'den konfigurasyonu geri yukle
+copy usb startup-config ...  # USB'den konfigurasyonu geri yukle
+show flash                   # flash bellek icerik ve doluluk
 ```

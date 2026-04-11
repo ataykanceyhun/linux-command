@@ -31,6 +31,7 @@ kisa notlar olarak belirtilir.
 - [VLAN ve Port Yapilandirma](network/aruba-aos-switch/vlan-port-yapilandirma.md)
 - [LAG ve LACP Yapilandirma](network/aruba-aos-switch/lag-lacp-yapilandirma.md)
 - [Routing ve ACL Yapilandirma](network/aruba-aos-switch/routing-acl-yapilandirma.md)
+- [Yedekleme ve Geri Yukleme](network/aruba-aos-switch/yedekleme-geri-yukleme.md)
 - [Aruba Switch Index](network/aruba-aos-switch/README.md)
 
 ## Runbook Katalogu
@@ -46,6 +47,7 @@ kisa notlar olarak belirtilir.
 | Aruba Switch | `network/aruba-aos-switch/vlan-port-yapilandirma.md` | Medium |
 | Aruba Switch | `network/aruba-aos-switch/lag-lacp-yapilandirma.md` | High |
 | Aruba Switch | `network/aruba-aos-switch/routing-acl-yapilandirma.md` | High |
+| Aruba Switch | `network/aruba-aos-switch/yedekleme-geri-yukleme.md` | High |
 
 ## Hizli Baslangic
 
